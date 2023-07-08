@@ -1,0 +1,96 @@
+<p>registrationform works!</p>
+<div class="container registration-container">
+  <div class="card mt-4 form-section">
+    <div class="card-body">
+      <h5 class="card-title custom-heading">Hotel Booking Registration</h5>
+      <form (ngSubmit)="onSubmit()">
+        <!-- Customer Name -->
+        <h5 class="c-details">Customer Details</h5>
+        <div class="form-group">
+          <label for="customerName">Customer Name:</label>
+          <input type="text" class="form-control" id="customerName" [(ngModel)]="customerName" name="customerName"
+            required />
+        </div>
+        <!-- Check-in Date -->
+        <div class="form-group">
+          <label for="checkInDate">Check-in Date:</label>
+          <input type="date" class="form-control" id="checkInDate" [(ngModel)]="checkInDate" name="checkInDate"
+            required />
+        </div>
+        <!-- Total No of Days -->
+        <div class="form-group">
+          <label for="totalNoOfDays">Total No of Days:</label>
+          <input type="number" class="form-control" id="totalNoOfDays" [(ngModel)]="totalNoOfDays" name="totalNoOfDays"
+            required>
+        </div>
+        <!-- Total No of Persons -->
+        <div class="form-group">
+          <label for="totalNoOfPersons">Total No of Persons:</label>
+          <input type="number" class="form-control" id="totalNoOfPersons" [(ngModel)]="totalNoOfPersons"
+            name="totalNoOfPersons" required>
+        </div>
+        <h5 class="c-details">Select Room Type</h5>
+        <!-- Room Type -->
+        <div class="form-group">
+          <label for="roomType">Room Type:</label>
+          <select class="form-control" id="roomType" [(ngModel)]="roomtype" name="roomType" required>
+            <option value="" disabled>Select Room Type</option>
+            <option value="Delux Room">Delux Room</option>
+            <!-- <img class="image" src="../../assets/Deluxe room.jpeg" alt=""> -->
+            <option value="Suite Room">Suite Room.</option>
+          </select>
+          <!-- <img class="image" src="../../assets/suite room.jpeg" alt=""> -->
+        </div>
+        <h5 class="c-details">Select Amenities</h5>
+        <!-- Amenities -->
+        <div class="form-group">
+          <label for="amenities">Amenities:</label>
+          <div class="amenities-container">
+            <label>
+              <input type="checkbox" id="amenityAC" [(ngModel)]="amenityAC" name="amenities" value="AC"> AC
+              <img class="images" src="../../assets/ac-room.jpeg" alt="">
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="checkbox" id="amenityLocker" [(ngModel)]="amenityLocker" name="amenities"
+                value="Locker">Locker
+              <img class="images" src="../../assets/locker room.webp" alt="">
+            </label>
+          </div>
+        </div>
+        <h5 class="c-details">Advance Amount</h5>
+        <!-- Advance Amount -->
+        <div class="form-group">
+          <label for="advanceAmount">Advance Amount:</label>
+          <input type="number" class="form-control" id="advanceAmount" [(ngModel)]="advanceAmount" name="advanceAmount">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <hr>
+
+      <div *ngIf="storedFormList.length > 0" class="stored-data">
+        <h3>Stored Form Data:</h3>
+        <div *ngFor="let formData of storedFormList; let i = index" class="stored-item">
+          <p><strong>Customer Name:</strong> {{ formData.customerName }}</p>
+          <p> <strong>Date:</strong> {{formData.checkInDate}}</p>
+          <p> <strong>No of Days:</strong> {{formData.totalNoOfDays}}</p>
+          <p> <strong>No of Persons:</strong> {{formData.totalNoOfPersons}}</p>
+          <p> <strong>Room Type:</strong> {{formData.roomtype}}</p>
+          <p><strong>Amenities:</strong>
+            <span *ngIf="formData.amenityAC">AC</span>
+            <span *ngIf="formData.amenityLocker"> Locker</span>
+          </p>
+          <p> <strong>Advance Amount:</strong> {{formData.advanceAmount}}</p>
+          <p> <strong>Room Rate:</strong> {{formData.roomRate}}</p>
+          <p> <strong>Total Cost:</strong> {{formData.totalCost}}</p>
+          <p> <strong>Total Balence:</strong> {{formData.balance}}</p>
+          <button class="btn btn-primary btn-remove" (click)="removeStoredData(i)">Remove</button>
+          <hr>
+        </div>
+      </div>
+    </div>
+      
+  </div>
+</div>
